@@ -1,0 +1,68 @@
+.author-avatar {
+  background-size: cover;
+}
+
+.commenter-avatar {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background-size: cover;
+  vertical-align: middle;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  color: #0055AA;
+}
+
+.comments {
+  padding: 1em 1em;
+  max-height: 20em;
+  overflow-y: scroll;
+  box-shadow: inset 0px 0px 2px .5px rgb(97, 97, 97);
+  border-radius: 5px;
+  border: .5px solid lightgray;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.comments::-webkit-scrollbar, .body::-webkit-scrollbar {
+  display: none;
+}
+
+mat-spinner {
+  margin: 0px auto;
+}
+
+.body {
+  max-height: 20em;
+  overflow-y: scroll;
+  white-space: pre-wrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.comment {
+  font-size: smaller;
+  max-height: 10em;
+  white-space: pre-wrap;
+  overflow-y: scroll;
+}
+
+.comment-card {
+  background-color: rgb(245, 245, 245);
+}
+
+mat-card > mat-card-actions {
+  border-top: 1px solid rgb(194, 194, 194);
+  text-align: center;
+}

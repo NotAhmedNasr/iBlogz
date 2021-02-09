@@ -1,0 +1,4 @@
+<div class="blog" @fade2 *ngFor="let blog of blogs">
+  <app-blog-details [blog]="blog" [user]="user" (delete)="remove(blog._id!);">
+  </app-blog-details>
+</div>

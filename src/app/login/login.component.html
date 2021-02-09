@@ -1,0 +1,32 @@
+<div class="container">
+  <h1 class="header">Login</h1>
+  <form class="offset-lg-3 offset-1 col-lg-6 col-10" [formGroup]="loginForm" (ngSubmit)="login();">
+    <mat-form-field>
+
+      <mat-label>Username</mat-label>
+      <input matInput type="text" formControlName="username">
+
+      <mat-error>Invalid Username or Password</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field>
+
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+
+    </mat-form-field>
+    <div class="submit">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+        Login
+      </button>
+      <p><br>Don't have an account, <a routerLink="../register">Register</a> instead.</p>
+    </div>
+  </form>
+
+</div>

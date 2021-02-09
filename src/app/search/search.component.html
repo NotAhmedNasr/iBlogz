@@ -1,0 +1,42 @@
+<div class="container header">
+  <div class="filters col-4 offset-4">
+    Search By:
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="choice">
+      <mat-radio-button value="0">Title</mat-radio-button>
+      <mat-radio-button value="1">Tag</mat-radio-button>
+      <mat-radio-button value="2">Author</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="search col-4 offset-4">
+    <span class="search ml-5">
+      <mat-form-field>
+        <input #searchTxt matInput type="text" [(ngModel)]="value" placeholder="Search">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-icon-button (click)="search(searchTxt.value);">
+        <mat-icon>search</mat-icon>
+      </button>
+    </span>
+  </div>
+</div>
+<hr>
+<div class="container-fluid row results m-0">
+  <app-blog-list class="col-12 offset-md-2 col-md-8" [blogs]="blogs">
+  </app-blog-list>
+
+  <div *ngIf="loaded && !this.showSpinner && !endOfLoading" class="text-center col-12">
+    <button mat-button class="w-50 text-light" (click)="loadMore();">Load More...</button>
+  </div>
+</div>
+
+<div *ngIf="notFound">
+  <h1 class="text-center">
+    NO RESULTS!!
+  </h1>
+</div>
+
+<div class="container" *ngIf="this.showSpinner">
+  <mat-spinner [diameter]="50" color="warn"></mat-spinner>
+</div>

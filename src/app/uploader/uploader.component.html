@@ -1,0 +1,47 @@
+<form>
+  <!-- onChange hanlder resets the input value to get the change event when uploading the same file consecutively -->
+  <input type="file" id="fileupload" #fileInput ng2FileSelect [style.display]="'none'" [uploader]="uploader!"
+    (change)="fileInput.value=''"/>
+</form>
+
+<div class="text-center" *ngIf="!responses[0]?.status">
+  <button mat-button (click)="fileInput.click()">Upload Image</button>
+</div>
+
+<div class="text-center" *ngFor="let response of responses; let i = index">
+  <div class="status" *ngIf="!response.status">
+    <mat-progress-spinner [ngStyle]="{margin: '5em auto'}" class="example-margin" color="primary" mode="determinate"
+      [value]="response.progress">
+    </mat-progress-spinner>
+    Uploading...
+    <div *ngIf="!response.status">In progress</div>
+    <div class="status-code" *ngIf="response.status">Upload completed</div>
+  </div>
+  <mat-card *ngIf="response.status" [ngStyle]="{margin: '5em auto'}">
+    <img mat-card-image [src]="response.data.url" alt="preview">
+  </mat-card>
+
+  <div class="text-center" *ngIf="response.status">
+    <button mat-button color="primary" (click)="confirm(response.data.url)">
+      Save
+    </button>
+
+    <button #discard mat-button color="warn" (click)="deleteImage(response.data, i); cancel();">
+      Discard
+    </button>
+  </div>
+</div>
+
+<div>
+  <h1 class="text-center text-info mt-5">
+    Only JPEG and PNG are allowed!
+  </h1>
+</div>
+
+<div class="text-center" *ngIf="!responses[0]?.status">
+  <button mat-button color="primary" (click)="cancel();">
+    Cancel
+  </button>
+</div>
+
+

@@ -1,0 +1,11 @@
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 1em;
+}
+
+.mat-radio-group {
+  margin-left: 1em;
+}
+
+mat-spinner {
+  margin: 1em auto;
+}

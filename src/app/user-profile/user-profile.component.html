@@ -1,0 +1,70 @@
+<div class="container p-0" *ngIf="loaded">
+  <div class="details-container container p-0 m-0">
+
+    <div @fade1 class="profile-image" [ngStyle]="avatar">
+    </div>
+
+    <div class="text-center mt-2" *ngIf="owned">
+      <button mat-raised-button (click)="openDialog();">Change Picture</button>
+    </div>
+
+    <div class="details col-12 m-0">
+
+      <div @fade2 class="details-text text-center">{{user.username}}</div>
+      <div *ngIf="!owned" @fade2 class="actions" class="text-center">
+        <button *ngIf="!followed" mat-button color="primary" (click)="follow();">
+          <mat-icon class="mr-0">article</mat-icon>
+          Follow
+        </button>
+        <button *ngIf="followed" mat-button color="warn" (click)="unfollow();">
+          <mat-icon class="mr-0">cancel_presentation</mat-icon>
+          Unfollow
+        </button>
+      </div>
+
+      <div @fade3 class="bio col-12 offset-md-2 col-md-8">
+
+        <button *ngIf="owned" mat-mini-fab color="warn" class="float-right ml-1" (click)="deleteUser();">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <button *ngIf="owned" mat-mini-fab color="primary" class="float-right edit" (click)="edit();">
+          <mat-icon>create</mat-icon>
+        </button>
+
+        <div class="bio-detail">
+          <mat-icon color="primary" class="mr-1">account_circle</mat-icon>
+          <span>{{user.firstname + ' ' + user.lastname}}</span>
+        </div>
+
+        <div class="bio-detail">
+          <mat-icon color="primary" class="mr-1">email</mat-icon>
+          <span>{{user.email}}</span>
+        </div>
+
+        <div class="bio-detail">
+          <mat-icon color="primary" class="mr-1">cake</mat-icon>
+          <span>{{user.dob |date}}</span>
+        </div>
+
+        <div class="bio-detail">
+          <mat-icon color="primary" class="mr-1">history_edu</mat-icon>
+          <span>Joined in {{user.created_at |date}}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div @fade3 class="mt-2 col-12 offset-md-2 col-md-8 pt-2">
+    <h1 class="text-center blogs-header">Latest Blogz</h1>
+    <app-blog-list [blogs]="blogs">
+    </app-blog-list>
+    <div *ngIf="loaded && !this.showSpinner && !endOfLoading" class="text-center col-12">
+      <button mat-button class="w-50 text-light" (click)="loadMore();">Load More...</button>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="!loaded || this.showSpinner">
+  <mat-spinner [diameter]="50" color="warn"></mat-spinner>
+</div>

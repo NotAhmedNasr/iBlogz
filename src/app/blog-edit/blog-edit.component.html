@@ -1,0 +1,56 @@
+<div class="container text-center">
+  <h1 mat-dialog-title>Edit Blog</h1>
+  <form [formGroup]="blogForm" (ngSubmit)="edit();">
+    <div>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput cdkFocusInitial formControlName="title">
+        <mat-error>
+          Blog must have a title
+        </mat-error>
+      </mat-form-field>
+
+      <button *ngIf="!photo?.value || photo?.value === ''" mat-button class="d-block upload" type="button" (click)="openDialog();">
+        <mat-icon>add</mat-icon>
+        Image
+      </button>
+
+      <mat-card *ngIf="photo?.value && photo?.value !== ''" [ngStyle]="{margin: '1em auto'}">
+        <img mat-card-image [src]="photo?.value" alt="preview">
+        <mat-card-footer>
+          <button mat-button color="warn" (click)="removeImage();">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-card-footer>
+      </mat-card>
+
+      <mat-form-field appearance="outline" class="w-75">
+        <mat-label>Write your blog here</mat-label>
+        <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="4" cdkAutosizeMaxRows="8" maxlength="1000"
+          formControlName="body"></textarea>
+        <mat-hint>Max 1000 characters</mat-hint>
+      </mat-form-field>
+
+      <h3>Tags</h3>
+      <div formArrayName="tags">
+        <mat-form-field @fade class="tag" appearance="outline" *ngFor="let tag of tags.controls, let i = index">
+          <mat-label>Tag</mat-label>
+          <input matInput maxlength="20" [formControlName]="i">
+          <button type="button" mat-icon-button matSuffix (click)="deleteTag(i);">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint>Max 20 characters</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button mat-mini-fab color="accent" type="button" (click)="addTag();">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <div class="text-center mt-5">
+      <button mat-button type="button" (click)="close();">CANCEL</button>
+      <button mat-button type="submit">SAVE</button>
+    </div>
+  </form>
+</div>

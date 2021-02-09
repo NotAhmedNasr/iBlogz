@@ -1,0 +1,12 @@
+.tag {
+  width: 30%;
+  margin-left: 1em;
+}
+
+.upload {
+  margin: 1em auto;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

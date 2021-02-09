@@ -1,0 +1,41 @@
+.search {
+  font-size: .8em;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  padding: 2em 1em;
+  background-color: #242526;
+  color: white;
+}
+
+
+.home {
+  width: 4em;
+  height: 4em;
+  background-image: url("../../assets/icons/android-chrome-512x512.png");
+  background-size: cover;
+  margin-right: 2em;
+}
+
+.profile {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile {
+  border-radius: 50%;
+  background-color: white;
+}
+
+.primary {
+  background-color: #0055AA;
+  margin-right: 1em;
+}

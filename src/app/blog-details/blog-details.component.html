@@ -1,0 +1,108 @@
+<mat-card class="blog-details" *ngIf="loaded && blog._id !== ''">
+  <mat-card-header>
+    <div mat-card-avatar class="author-avatar clickable" (click)="viewAuthor();" [ngStyle]="avatar"></div>
+
+    <mat-card-title class="clickable" (click)="viewAuthor();">
+      {{blog?.author?.username}}
+    </mat-card-title>
+
+    <mat-card-subtitle>
+      {{blog?.created_at | date}}
+    </mat-card-subtitle>
+
+    <span class="spacer"></span>
+    <button *ngIf="blog.author?._id === user._id" color="primary" mat-icon-button class="float-right" (click)="edit();">
+      <mat-icon>create</mat-icon>
+    </button>
+    <button *ngIf="blog.author?._id === user._id" color="warn" mat-icon-button class="float-right" (click)="deleteBlog();">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <img mat-card-image *ngIf="blog?.photo && blog?.photo !== ''" src="{{blog?.photo}}" alt="blog photo">
+
+  <mat-card-content>
+    <h1>
+      {{blog?.title}}
+    </h1>
+    <p class="body">
+      {{blog?.body}}
+    </p>
+    <mat-chip-list aria-label="tags">
+      <mat-chip color="accent" selected *ngFor="let tag of blog?.tags" (click)="searchTag(tag);">
+        {{'#' + tag}}
+      </mat-chip>
+    </mat-chip-list>
+  </mat-card-content>
+
+  <mat-card-actions *ngIf="loggedIn">
+    <button @fadein *ngIf="!liked" mat-icon-button (click)="like();">
+      <mat-icon class="text-primary">thumb_up_off_alt</mat-icon>
+    </button>
+    <button @fadein *ngIf="liked" mat-icon-button (click)="unlike();">
+      <mat-icon class="text-success">thumb_up</mat-icon>
+    </button>
+    <span class="text-info">
+      {{likes}}
+    </span>
+    <button mat-button *ngIf="!comment" (click)="showComment();">
+      COMMENT
+    </button>
+  </mat-card-actions>
+
+  <mat-card-content *ngIf="comment" @fadein>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Leave a comment</mat-label>
+      <textarea matInput placeholder="Comment here..." cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+        maxlength="500" [(ngModel)]="commentContent"></textarea>
+      <mat-hint>Max 500 characters</mat-hint>
+    </mat-form-field>
+
+    <mat-card-actions>
+      <button mat-button (click)="saveComment();">COMMENT</button>
+      <button mat-button (click)="cancelComment();">CANCEL</button>
+    </mat-card-actions>
+  </mat-card-content>
+
+  <button mat-button class="w-100" (click)="commentList = !commentList">
+    Comments
+    <mat-icon *ngIf="!commentList">
+      keyboard_arrow_down
+    </mat-icon>
+    <mat-icon *ngIf="commentList">
+      keyboard_arrow_up
+    </mat-icon>
+  </button>
+  <div @fadein class="container comments" *ngIf="commentList">
+
+    <mat-card class="mt-3 comment-card" *ngFor="let comment of blog.comments">
+      <mat-card-title>
+        <h3>
+          <span class="commenter-avatar clickable" (click)="viewAuthor(comment.commenter?._id);" [ngStyle]="commenterAvatar(comment)">
+          </span>
+          <span class="clickable" (click)="viewAuthor(comment.commenter?._id);">
+            {{comment.commenter?.username}}
+          </span>
+          <button *ngIf="comment.commenter?._id === user._id" mat-icon-button class="float-right" (click)="deleteComment(comment._id);">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </h3>
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        {{comment?.created_at | date}}
+      </mat-card-subtitle>
+
+      <mat-card-content>
+        <p class="comment">
+          {{comment.content}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</mat-card>
+
+<div class="container" *ngIf="!loaded">
+  <mat-spinner color="warn"></mat-spinner>
+</div>

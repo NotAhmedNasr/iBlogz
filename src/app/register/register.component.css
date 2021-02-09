@@ -1,0 +1,41 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  text-align: center;
+  margin-top: 2em;
+  margin-left: 1em;
+}
+
+mat-form-field {
+  margin-top: 1em;
+}
+
+.header {
+  font-size: 3em;
+  text-align: center;
+}
+
+mat-vertical-stepper {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 1em;
+  font-size: larger;
+  border-radius: 4px;
+}
+
+.home {
+  width: 1em;
+  height: 1em;
+  background-image: url("../../assets/icons/android-chrome-512x512.png");
+  background-size: cover;
+  margin-right: 2em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+mat-form-field {
+  width: 100%;
+}
+

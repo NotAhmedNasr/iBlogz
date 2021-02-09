@@ -1,0 +1,10 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar [ngStyle]="avatar" class="user-avatar"></div>
+    <mat-card-title>{{user?.username}}</mat-card-title>
+    <mat-card-subtitle>{{user?.email}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions class="text-center">
+    <button mat-button (click)="view();">VIEW PROFILE</button>
+  </mat-card-actions>
+</mat-card>

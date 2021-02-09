@@ -1,0 +1,39 @@
+<mat-toolbar>
+  <button mat-fab color="primary" routerLink="" class="home">
+  </button>
+
+  <span class="spacer"></span>
+
+  <button mat-fab class="primary" [routerLink]="['search']" *ngIf="loggedIn">
+    <mat-icon>search</mat-icon>
+  </button>
+
+  <button mat-fab class="primary" routerLink="/users" *ngIf="loggedIn">
+    <mat-icon>people_outline</mat-icon>
+  </button>
+
+  <button mat-fab class="primary" (click)="openDialog();" *ngIf="loggedIn">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <span class="spacer"></span>
+  <button mat-button routerLink="login" *ngIf="!loggedIn">
+    Login
+    <mat-icon>login</mat-icon>
+  </button>
+  <button mat-button routerLink="register" *ngIf="!loggedIn">
+    Register
+    <mat-icon>account_box</mat-icon>
+  </button>
+
+  <div mat-icon-button class="profile-div">
+    <button mat-icon-button routerLink="profile" *ngIf="loggedIn">
+      <img [src]="avatar" class="profile">
+    </button>
+  </div>
+
+  <button mat-button (click)="logout();" *ngIf="loggedIn">
+    Logout
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>

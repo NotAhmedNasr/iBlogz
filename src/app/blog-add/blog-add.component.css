@@ -1,0 +1,28 @@
+.tag {
+  width: 30%;
+  margin-left: 1em;
+}
+
+.container {
+  overflow: visible;
+}
+
+.upload {
+  margin: 1em auto;
+}
+
+::-webkit-scrollbar {
+  width: .7em;
+  background-color: transparent;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #0055AA;
+  border-radius: 10px;
+  height: 80px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8292a1;
+}

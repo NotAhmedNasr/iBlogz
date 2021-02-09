@@ -1,0 +1,24 @@
+<div @fade class="container">
+  <div class="filters">
+    <span class="spacer"></span>
+    <button mat-raised-button class="mb-2 ml-2" [ngClass]="{'bg-success': !all, 'text-white': !all}"
+      (click)="getFollowing();">
+      Following
+    </button>
+    <button mat-raised-button class="mb-2 ml-2" [ngClass]="{'bg-success': all, 'text-white': all}" (click)="getAll();">
+      All
+    </button>
+  </div>
+  <div class="user col-12 offset-md-2 col-md-8" *ngFor="let user of displayedUsers">
+    <app-user-details [user]="user">
+    </app-user-details>
+  </div>
+
+  <div *ngIf="loaded && !this.showSpinner && !endOfLoading" class="text-center col-12">
+    <button mat-button class="w-50 text-light" (click)="loadMore();">Load More...</button>
+  </div>
+</div>
+
+<div @fade class="container" *ngIf="!loaded || this.showSpinner">
+  <mat-spinner [diameter]="50" color="warn"></mat-spinner>
+</div>

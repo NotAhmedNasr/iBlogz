@@ -1,0 +1,15 @@
+.blogs-container {
+  margin: 0 auto;
+}
+
+.spacer{
+  flex: 1 1 auto;
+}
+
+.filters {
+  display: flex;
+}
+
+mat-spinner {
+  margin: 1em auto;
+}
