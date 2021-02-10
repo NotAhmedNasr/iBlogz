@@ -1,13 +1,16 @@
 <div class="container header">
-  <div class="filters col-4 offset-4">
-    Search By:
+  <div class="filters">
+    <span class="spacer"></span>
+    <span>Search By:</span>
     <mat-radio-group aria-label="Select an option" [(ngModel)]="choice">
       <mat-radio-button value="0">Title</mat-radio-button>
       <mat-radio-button value="1">Tag</mat-radio-button>
       <mat-radio-button value="2">Author</mat-radio-button>
     </mat-radio-group>
+    <span class="spacer"></span>
   </div>
-  <div class="search col-4 offset-4">
+  <div class="search">
+    <span class="spacer"></span>
     <span class="search ml-5">
       <mat-form-field>
         <input #searchTxt matInput type="text" [(ngModel)]="value" placeholder="Search">
@@ -19,15 +22,16 @@
         <mat-icon>search</mat-icon>
       </button>
     </span>
+    <span class="spacer"></span>
   </div>
 </div>
 <hr>
-<div class="container-fluid row results m-0">
-  <app-blog-list class="col-12 offset-md-2 col-md-8" [blogs]="blogs">
+<div class="container-fluid row results m-0 p-0">
+  <app-blog-list class="col-12 offset-md-2 col-md-8 p-0" [blogs]="blogs">
   </app-blog-list>
 
   <div *ngIf="loaded && !this.showSpinner && !endOfLoading" class="text-center col-12">
-    <button mat-button class="w-50 text-light" (click)="loadMore();">Load More...</button>
+    <button mat-button class="w-50" (click)="loadMore();">Load More...</button>
   </div>
 </div>
 

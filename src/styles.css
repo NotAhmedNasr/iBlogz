@@ -4,10 +4,11 @@
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-image: url('./assets/images/bg-1.png');
+  background-color: rgb(245, 255, 253);
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
 
+/*background-image: url('./assets/images/bg-1.png');*/
 

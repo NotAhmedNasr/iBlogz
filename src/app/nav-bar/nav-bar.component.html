@@ -1,18 +1,30 @@
 <mat-toolbar>
-  <button mat-fab color="primary" routerLink="" class="home">
+  <button
+      routerLink=""
+      class="home">
   </button>
 
   <span class="spacer"></span>
 
-  <button mat-fab class="primary" [routerLink]="['search']" *ngIf="loggedIn">
-    <mat-icon>search</mat-icon>
+  <button class="actions"
+      [ngClass]="{'actions-active': currentUrl == '/search'}"
+      [routerLink]="['search']"
+      *ngIf="loggedIn">
+    <mat-icon class="button-icon">search</mat-icon>
   </button>
 
-  <button mat-fab class="primary" routerLink="/users" *ngIf="loggedIn">
-    <mat-icon>people_outline</mat-icon>
+  <button class="actions"
+      [ngClass]="{'actions-active': currentUrl == '/users'}"
+      routerLink="/users"
+      *ngIf="loggedIn">
+    <mat-icon class="button-icon">people_outline</mat-icon>
   </button>
 
-  <button mat-fab class="primary" (click)="openDialog();" *ngIf="loggedIn">
+  <button
+      mat-fab
+      class="add"
+      (click)="openDialog();"
+      *ngIf="loggedIn && (currentUrl == '/profile' || currentUrl == '/' || currentUrl == '/profile/user')">
     <mat-icon>add</mat-icon>
   </button>
 
@@ -26,14 +38,13 @@
     <mat-icon>account_box</mat-icon>
   </button>
 
-  <div mat-icon-button class="profile-div">
-    <button mat-icon-button routerLink="profile" *ngIf="loggedIn">
+  <div class="profile-div text-center" *ngIf="loggedIn" [ngClass]="{'actions-active': currentUrl == '/profile'}">
+    <button mat-icon-button routerLink="profile">
       <img [src]="avatar" class="profile">
     </button>
   </div>
 
-  <button mat-button (click)="logout();" *ngIf="loggedIn">
-    Logout
+  <button mat-button class="actions p-0" (click)="logout();" *ngIf="loggedIn">
     <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>

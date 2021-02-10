@@ -9,3 +9,11 @@
 mat-spinner {
   margin: 1em auto;
 }
+
+.filters, .search {
+  display: flex;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

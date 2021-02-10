@@ -1,4 +1,4 @@
-<div class="container text-center">
+<div class="container text-center p-0">
   <h1 mat-dialog-title>New Blog</h1>
   <form [formGroup]="blogForm" (ngSubmit)="add();">
     <div>
@@ -25,7 +25,7 @@
       </mat-card>
 
 
-      <mat-form-field appearance="outline" class="w-75">
+      <mat-form-field appearance="outline" class="w-100">
         <mat-label>Write your blog here</mat-label>
         <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="4" cdkAutosizeMaxRows="8" maxlength="1000"
           formControlName="body"></textarea>
@@ -34,13 +34,13 @@
 
       <h3>Tags</h3>
       <div formArrayName="tags">
-        <mat-form-field @fade class="tag" appearance="outline" *ngFor="let tag of tags.controls, let i = index">
+        <mat-form-field @fade class="w-md-25 w-50" appearance="outline" *ngFor="let tag of tags.controls, let i = index">
           <mat-label>Tag</mat-label>
           <input matInput maxlength="20" [formControlName]="i">
           <button type="button" mat-icon-button matSuffix (click)="deleteTag(i);">
             <mat-icon>close</mat-icon>
           </button>
-          <mat-hint>Max 20 characters</mat-hint>
+          <mat-hint>Max 20</mat-hint>
         </mat-form-field>
       </div>
     </div>
@@ -51,7 +51,7 @@
 
     <div class="text-center mt-5">
       <button mat-button type="button" (click)="close();">CANCEL</button>
-      <button mat-button type="submit">ADD</button>
+      <button mat-button [disabled]="!blogForm.valid" type="submit">ADD</button>
     </div>
   </form>
 </div>

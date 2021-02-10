@@ -1,19 +1,18 @@
 <div class="blogs-container container-fluid row" *ngIf="loaded">
   <div class="filters col-12" *ngIf="loggedIn">
-    <span class="spacer"></span>
-    <button mat-raised-button class="mb-2 ml-2" [ngClass]="{'bg-success': all, 'text-white': all}" (click)="getAll();">
+    <button mat-button class="mb-2 ml-2" [ngClass]="{'bg-success': all, 'text-white': all}" (click)="getAll();">
       All
     </button>
-    <button mat-raised-button class="mb-2 ml-2" [ngClass]="{'bg-success': !all, 'text-white': !all}"
+    <button mat-button class="mb-2 ml-2" [ngClass]="{'bg-success': !all, 'text-white': !all}"
       (click)="getFollowing();">
       Following
     </button>
   </div>
-  <app-blog-list class="col-12 offset-md-2 col-md-8" [blogs]="blogs">
+  <app-blog-list class="col-12 offset-md-2 col-md-8 p-0" [blogs]="blogs">
   </app-blog-list>
 
   <div *ngIf="loaded && !this.showSpinner && !endOfLoading" class="text-center col-12">
-    <button mat-button class="w-50 text-light" (click)="loadMore();">Load More...</button>
+    <button mat-button class="w-50" (click)="loadMore();">Load More...</button>
   </div>
 
 </div>

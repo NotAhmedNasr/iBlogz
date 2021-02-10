@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
   loaded = false;
 
   loadAll(page: number, count: number) {
+    this.showSpinner = true;
     this.blogService.getAll(page, count).subscribe(
       res => {
         if (!res[0]) {
@@ -50,6 +51,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadFollowing(page: number, count: number) {
+    this.showSpinner = true;
     this.blogService.getFollowing(page, count).subscribe(
       res => {
         if (!res[0]) {
@@ -82,8 +84,6 @@ export class HomeComponent implements OnInit {
   loadMore() {
 
     this.page++;
-
-    this.showSpinner = true;
 
     if (this.all) {
       this.loadAll(this.page, this.count);
