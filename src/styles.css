@@ -1,14 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
-/* html, body { height: 100%; } */
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: rgb(245, 255, 253);
+  background-color: rgb(248, 255, 254);
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
-
-/*background-image: url('./assets/images/bg-1.png');*/
 

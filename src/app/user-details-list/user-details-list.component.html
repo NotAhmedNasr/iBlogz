@@ -1,14 +1,18 @@
-<div @fade class="container p-0">
+<div class="container p-0">
   <div class="filters text-center">
-    <button mat-raised-button class="mb-2 ml-2" [ngClass]="{'bg-success': all, 'text-white': all}" (click)="getAll();">
+    <button mat-raised-button class="mb-2 ml-2" [disabled]="all" [ngClass]="{'bg-success': all, 'text-white': all}" (click)="getAll();">
       All
     </button>
-    <button mat-raised-button class="mb-2 ml-2" [ngClass]="{'bg-success': !all, 'text-white': !all}"
+    <button mat-raised-button class="mb-2 ml-2" [disabled]="followers" [ngClass]="{'bg-success': followers, 'text-white': followers}"
+      (click)="getFollowers();">
+      Followers
+    </button>
+    <button mat-raised-button class="mb-2 ml-2" [disabled]="following" [ngClass]="{'bg-success': following, 'text-white': following}"
       (click)="getFollowing();">
       Following
     </button>
   </div>
-  <div class="user col-12 offset-md-2 col-md-8 p-0" *ngFor="let user of displayedUsers">
+  <div @fade class="user col-12 offset-md-2 col-md-8 p-0" *ngFor="let user of users">
     <app-user-details [user]="user">
     </app-user-details>
   </div>

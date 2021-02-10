@@ -13,54 +13,64 @@ import { UserService } from '../_services/user.service';
   ]
 })
 export class UserDetailsListComponent implements OnInit {
+  users: User[] = [];
+  currentUser: User = new User();
 
   page = 0;
   count = 2;
+
   endOfLoading = false;
   showSpinner = false;
+  loaded = false;
+
+  all = true;
+  followers = false;
+  following = false;
 
   constructor(private userService: UserService, private session: SessionService) { }
 
   ngOnInit(): void {
-    this.load(0, this.count);
+    this.getAll();
     this.session.getLoggedUser().subscribe(
       res => this.currentUser = res,
       console.log
     );
   }
 
-  users: User[] = [];
-
-  currentUser: User = new User();
-
-  displayedUsers: User[] = [];
-
-  all = true;
-
-  loaded = false;
-
   getAll() {
+    this.page = 0;
     this.all = true;
-    this.displayedUsers = this.users;
+    this.endOfLoading = false;
+    this.following = this.followers = false;
+    this.users = [];
+    this.load(this.page, this.count);
   }
 
   getFollowing() {
-    this.all = false;
-    this.displayedUsers = this.users.filter(user => this.currentUser.following.includes(user._id));
+    this.page = 0;
+    this.following = true;
+    this.endOfLoading = false;
+    this.all = this.followers = false;
+    this.users = [];
+    this.load(this.page, this.count, true);
   }
 
-  load(page: number, count: number) {
-    this.userService.getAll(page, count).subscribe(
+  getFollowers() {
+    this.page = 0;
+    this.followers = true;
+    this.endOfLoading = false;
+    this.all = this.following = false;
+    this.users = [];
+    this.load(this.page, this.count, false, true);
+  }
+
+  load(page: number, count: number, following?: boolean, followers?: boolean) {
+    this.userService.getAll(page, count, following, followers).subscribe(
       result => {
-        if (!result[0]) {
+        if (result.length < count) {
           this.endOfLoading = true;
         }
         this.users.push(...result);
-        if (this.all) {
-          this.getAll()
-        } else {
-          this.getFollowing();
-        }
         this.showSpinner = false;
         this.loaded = true;
       },
@@ -73,7 +83,13 @@ export class UserDetailsListComponent implements OnInit {
 
     this.showSpinner = true;
 
-    this.load(this.page, this.count);
+    if (this.all) {
+      this.load(this.page, this.count);
+    } else if (this.following) {
+      this.load(this.page, this.count, true);
+    } else if (this.followers) {
+      this.load(this.page, this.count, false, true);
+    }
   }
 
 }

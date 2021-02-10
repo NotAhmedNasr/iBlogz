@@ -10,7 +10,8 @@
         </mat-error>
       </mat-form-field>
 
-      <button *ngIf="!photo?.value || photo?.value === ''" mat-button class="d-block upload" type="button" (click)="openDialog();">
+      <button matTooltip="add an image" *ngIf="!photo?.value || photo?.value === ''" mat-button class="d-block upload"
+        type="button" (click)="openDialog();">
         <mat-icon>add</mat-icon>
         Image
       </button>
@@ -34,10 +35,11 @@
 
       <h3>Tags</h3>
       <div formArrayName="tags">
-        <mat-form-field @fade class="w-md-25 w-50" appearance="outline" *ngFor="let tag of tags.controls, let i = index">
+        <mat-form-field @fade class="w-md-25 w-50" appearance="outline"
+          *ngFor="let tag of tags.controls, let i = index">
           <mat-label>Tag</mat-label>
           <input matInput maxlength="20" [formControlName]="i">
-          <button type="button" mat-icon-button matSuffix (click)="deleteTag(i);">
+          <button type="button" matTooltip="remove" mat-icon-button matSuffix (click)="deleteTag(i);">
             <mat-icon>close</mat-icon>
           </button>
           <mat-hint>Max 20</mat-hint>
@@ -45,13 +47,13 @@
       </div>
     </div>
 
-    <button mat-mini-fab color="accent" type="button" (click)="addTag();">
+    <button mat-mini-fab matTooltip="add a tag" color="accent" type="button" (click)="addTag();">
       <mat-icon>add</mat-icon>
     </button>
 
     <div class="text-center mt-5">
-      <button mat-button type="button" (click)="close();">CANCEL</button>
-      <button mat-button [disabled]="!blogForm.valid" type="submit">ADD</button>
+      <button mat-button matTooltip="discard and close" type="button" (click)="close();">CANCEL</button>
+      <button mat-button matTooltip="add blog" [disabled]="!blogForm.valid" type="submit">ADD</button>
     </div>
   </form>
 </div>

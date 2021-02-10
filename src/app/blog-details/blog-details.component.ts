@@ -2,26 +2,26 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BlogEditComponent } from '../blog-edit/blog-edit.component';
-import { fade, slide } from '../_animations/fade';
+import { fade } from '../_animations/fade';
 import { Blog } from '../_models/blog';
 import { User } from '../_models/user';
 import { Comment } from "../_models/comment";
 import { SessionService } from '../_services/session.service';
 import { BlogService } from '../_services/blog.service';
 import { ConfirmDelete } from '../confirm/confirm-component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-blog-details',
   templateUrl: './blog-details.component.html',
   styleUrls: ['./blog-details.component.css'],
   animations: [
     fade('fadein', 400),
-    slide
   ]
 })
 export class BlogDetailsComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private router: Router, private session: SessionService,
-    private blogService: BlogService) { }
+    private blogService: BlogService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.session.isLoggedIn().subscribe(
@@ -64,7 +64,9 @@ export class BlogDetailsComponent implements OnInit {
     this.liked = true;
     this.likes++;
     this.blogService.like(this.blog._id!).subscribe(
-      console.log,
+      res => {
+        this.openSnackBar('Liked');
+      },
       console.log
     );
   }
@@ -77,7 +79,9 @@ export class BlogDetailsComponent implements OnInit {
     this.likes--;
     this.liked = false;
     this.blogService.unlike(this.blog._id!).subscribe(
-      console.log,
+      res => {
+        this.openSnackBar('Unliked');
+      },
       console.log
     )
   }
@@ -90,6 +94,7 @@ export class BlogDetailsComponent implements OnInit {
     const comment = new Comment(this.commentContent);
     this.blogService.comment(this.blog._id!, comment).subscribe(
       res => {
+        this.openSnackBar('Comment was added successfully');
         this.blog.comments = res.comments;
         this.comment = false;
         this.commentContent = '';
@@ -126,7 +131,7 @@ export class BlogDetailsComponent implements OnInit {
   viewAuthor(id = this.blog.author?._id) {
     let options = {};
     if (this.user._id !== id) {
-      options = {queryParams: {id: id || this.blog.author?._id}};
+      options = { queryParams: { id: id || this.blog.author?._id } };
     }
     this.router.navigate(['profile/user'], options);
   }
@@ -138,6 +143,7 @@ export class BlogDetailsComponent implements OnInit {
   deleteComment(id: any) {
     this.blogService.uncomment(this.blog._id!, id).subscribe(
       res => {
+        this.openSnackBar('Comment was deleted successfully');
         this.blog.comments = res.comments;
         this.comment = false;
         this.commentContent = '';
@@ -155,6 +161,7 @@ export class BlogDetailsComponent implements OnInit {
       if (result) {
         this.blogService.delete(this.blog._id!).subscribe(
           res => {
+            this.openSnackBar('Blog was deleted successfully');
             this.delete.emit();
           },
           console.log
@@ -167,6 +174,12 @@ export class BlogDetailsComponent implements OnInit {
     return {
       backgroundImage: 'url(' + (comment.commenter?.profilePicture || '../../assets/images/profile.png') + ')'
     }
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 1000,
+    });
   }
 
 }

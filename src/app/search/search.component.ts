@@ -66,7 +66,7 @@ export class SearchComponent implements OnInit {
     this.endOfLoading = false;
     this.blogService.search(this.query, page, count).subscribe(
       res => {
-        if (!res[0]) {
+        if (res.length < count) {
           this.endOfLoading = true;
         }
         this.blogs.push(...res);

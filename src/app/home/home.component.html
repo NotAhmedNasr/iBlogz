@@ -1,9 +1,9 @@
 <div class="blogs-container container-fluid row" *ngIf="loaded">
   <div class="filters col-12" *ngIf="loggedIn">
-    <button mat-button class="mb-2 ml-2" [ngClass]="{'bg-success': all, 'text-white': all}" (click)="getAll();">
+    <button mat-button [disabled]="all" class="mb-2 ml-2" [ngClass]="{'bg-success': all, 'text-white': all}" (click)="getAll();">
       All
     </button>
-    <button mat-button class="mb-2 ml-2" [ngClass]="{'bg-success': !all, 'text-white': !all}"
+    <button mat-button [disabled]="!all" class="mb-2 ml-2" [ngClass]="{'bg-success': !all, 'text-white': !all}"
       (click)="getFollowing();">
       Following
     </button>

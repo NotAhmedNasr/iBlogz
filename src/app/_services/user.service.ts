@@ -19,13 +19,29 @@ export class UserService {
     }
   };
 
-  getAll(page: number, count: number) {
+  getAll(page: number, count: number, following?: boolean, followers?: boolean) {
+    let pagination = {
+      page: `${page}`,
+      count: `${count}`,
+    };
+
+    let params = {};
+    if (following) {
+      params = {
+        ...pagination,
+        following: 'true'
+      };
+    } else if (followers) {
+      params = {
+        ...pagination,
+        followers: 'true'
+      };
+    } else {
+      params = pagination;
+    }
     return this.http.get<User[]>(`${this.apiUrl}`, {
       ...this.httpOptions(),
-      params: {
-        page: `${page}`,
-        count: `${count}`
-      }
+      params: params
     });
   }
 

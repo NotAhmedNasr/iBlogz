@@ -36,12 +36,13 @@ import { MatNativeDateModule } from '@angular/material/core'
 import { MatDialogModule } from "@angular/material/dialog";
 import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ConfirmDelete } from './confirm/confirm-component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { UploaderComponent } from './uploader/uploader.component';
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -83,10 +84,11 @@ import { UploaderComponent } from './uploader/uploader.component';
     MatNativeDateModule,
     MatDialogModule,
     HttpClientModule,
-    MatSlideToggleModule,
     MatRadioModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
     FileUploadModule,
+    MatSnackBarModule,
     CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'blogzapp', upload_preset: 'p9ykgngb'}),
   ],
   entryComponents: [

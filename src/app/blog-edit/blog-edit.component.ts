@@ -6,7 +6,6 @@ import { UploaderComponent } from '../uploader/uploader.component';
 import { fade } from '../_animations/fade';
 import { Blog } from '../_models/blog';
 import { BlogService } from '../_services/blog.service';
-import { SessionService } from '../_services/session.service';
 
 @Component({
   selector: 'app-blog-edit',
@@ -19,7 +18,7 @@ import { SessionService } from '../_services/session.service';
 export class BlogEditComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<BlogEditComponent>, private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { blog: Blog }, private session: SessionService,
+    @Inject(MAT_DIALOG_DATA) public data: { blog: Blog },
     private router: Router, private blogService: BlogService, public dialog: MatDialog) { }
 
   blogForm: FormGroup = new FormGroup({});
@@ -36,7 +35,8 @@ export class BlogEditComponent implements OnInit {
     this.toEditBlog = this.data.blog;
     this.blogForm = this.fb.group({
       title: [this.toEditBlog.title, [
-        Validators.required
+        Validators.required,
+        Validators.maxLength(100)
       ]],
       body: [this.toEditBlog.body],
       photo: [this.toEditBlog.photo],

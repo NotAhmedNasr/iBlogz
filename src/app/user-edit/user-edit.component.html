@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid p-0">
   <h1 class="header">Edit Profile</h1>
   <hr>
 
@@ -96,7 +96,7 @@
       </mat-error>
     </mat-form-field>
 
-    <div>
+    <div class="text-center">
       <button mat-raised-button color="primary" type="submit" [disabled]="!editForm.valid">
         SAVE
       </button>
@@ -104,6 +104,5 @@
       <button mat-raised-button (click)="close();">CANCEL</button>
       <hr>
     </div>
-
   </form>
 </div>

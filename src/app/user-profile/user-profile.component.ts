@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmDelete } from '../confirm/confirm-component';
 import { UploaderComponent } from '../uploader/uploader.component';
@@ -141,7 +141,7 @@ export class UserProfileComponent implements OnInit {
     }
     this.blogService.search(query, page, count).subscribe(
       res => {
-        if (!res[0]) {
+        if (res.length < count) {
           this.endOfLoading = true;
         }
         this.blogs.push(...res)

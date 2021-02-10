@@ -4,7 +4,6 @@ import { Router, NavigationEnd } from '@angular/router';
 import { BlogAddComponent } from '../blog-add/blog-add.component';
 import { User } from '../_models/user';
 import { SessionService } from '../_services/session.service';
-import { UserService } from '../_services/user.service';
 import {filter} from 'rxjs/operators'
 
 @Component({
@@ -15,7 +14,7 @@ import {filter} from 'rxjs/operators'
 export class NavBarComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private session: SessionService,
-    private router: Router, private userService: UserService) {
+    private router: Router) {
     this.session.isLoggedIn().subscribe(
       res => {
         this.loggedIn = res;
@@ -29,7 +28,6 @@ export class NavBarComponent implements OnInit {
           ).subscribe((event) =>
            {
               this.currentUrl = (event as NavigationEnd).url;
-              console.log(this.currentUrl);
            });
     this.session.getLoggedUser().subscribe(
       res => {

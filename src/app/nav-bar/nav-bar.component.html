@@ -1,5 +1,6 @@
 <mat-toolbar>
   <button
+  matTooltip="home"
       routerLink=""
       class="home">
   </button>
@@ -7,13 +8,16 @@
   <span class="spacer"></span>
 
   <button class="actions"
+      matTooltip="search for blogs"
       [ngClass]="{'actions-active': currentUrl == '/search'}"
       [routerLink]="['search']"
       *ngIf="loggedIn">
     <mat-icon class="button-icon">search</mat-icon>
   </button>
 
-  <button class="actions"
+  <button
+      class="actions"
+      matTooltip="find people"
       [ngClass]="{'actions-active': currentUrl == '/users'}"
       routerLink="/users"
       *ngIf="loggedIn">
@@ -21,11 +25,12 @@
   </button>
 
   <button
-      mat-fab
-      class="add"
+      mat-button
+      matTooltip="add new blog"
       (click)="openDialog();"
-      *ngIf="loggedIn && (currentUrl == '/profile' || currentUrl == '/' || currentUrl == '/profile/user')">
-    <mat-icon>add</mat-icon>
+      *ngIf="loggedIn"
+      class="actions p-0">
+    <mat-icon class="button-icon">add</mat-icon>
   </button>
 
   <span class="spacer"></span>
@@ -39,12 +44,12 @@
   </button>
 
   <div class="profile-div text-center" *ngIf="loggedIn" [ngClass]="{'actions-active': currentUrl == '/profile'}">
-    <button mat-icon-button routerLink="profile">
+    <button matTooltip="your profile" mat-icon-button routerLink="profile">
       <img [src]="avatar" class="profile">
     </button>
   </div>
 
-  <button mat-button class="actions p-0" (click)="logout();" *ngIf="loggedIn">
+  <button matTooltip="logout" mat-button class="actions p-0" (click)="logout();" *ngIf="loggedIn">
     <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>

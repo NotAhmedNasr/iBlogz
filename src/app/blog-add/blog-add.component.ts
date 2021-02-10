@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UploaderComponent } from '../uploader/uploader.component';
 import { fade } from '../_animations/fade';
 import { BlogService } from '../_services/blog.service';
-import { SessionService } from '../_services/session.service';
 
 @Component({
   selector: 'app-blog-add',
@@ -18,14 +18,14 @@ import { SessionService } from '../_services/session.service';
 export class BlogAddComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<BlogAddComponent>, private fb: FormBuilder,
-    private session: SessionService, private router: Router, private blogService: BlogService,
+    private router: Router, private blogService: BlogService, private snackBar: MatSnackBar,
     public dialog: MatDialog) { }
 
   blogForm: FormGroup = new FormGroup({});
 
   imageToUpload: File | null = null;
 
-  allowedFiles: string[] = ['image/x-png', 'image/png','image/gif','image/jpeg']
+  allowedFiles: string[] = ['image/x-png', 'image/png', 'image/gif', 'image/jpeg']
 
   invalidFile = false;
 
@@ -33,7 +33,8 @@ export class BlogAddComponent implements OnInit {
 
     this.blogForm = this.fb.group({
       title: ['', [
-        Validators.required
+        Validators.required,
+        Validators.maxLength(100)
       ]],
       body: [''],
       photo: [''],
@@ -87,6 +88,7 @@ export class BlogAddComponent implements OnInit {
     const blog = this.blogForm.value;
     this.blogService.add(blog).subscribe(
       res => {
+        this.openSnackBar()
         location.reload();
         this.router.navigateByUrl('');
       },
@@ -109,5 +111,11 @@ export class BlogAddComponent implements OnInit {
 
   removeImage() {
     this.photo?.setValue('');
+  }
+
+  openSnackBar() {
+    this.snackBar.open('Blog was added successfully','' , {
+      duration: 1000,
+    });
   }
 }

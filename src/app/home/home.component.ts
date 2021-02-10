@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
     this.showSpinner = true;
     this.blogService.getFollowing(page, count).subscribe(
       res => {
-        if (!res[0]) {
+        if (res.length < count) {
           this.endOfLoading = true;
         }
         this.blogs.push(...res);
