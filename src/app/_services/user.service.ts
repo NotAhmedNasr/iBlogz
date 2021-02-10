@@ -21,7 +21,7 @@ export class UserService {
 
   getAll(page: number, count: number) {
     return this.http.get<User[]>(`${this.apiUrl}`, {
-      ...this.httpOptions,
+      ...this.httpOptions(),
       params: {
         page: `${page}`,
         count: `${count}`
