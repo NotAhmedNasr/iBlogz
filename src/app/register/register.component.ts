@@ -26,6 +26,9 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
 
   ngOnInit(): void {
+    if (localStorage.getItem('userId')) {
+      this.router.navigateByUrl('');
+    };
     this.maxDate.setFullYear(2010, 11, 31);
     this.minDate.setFullYear(1970, 1, 1);
     this.registerForm = this.fb.group({

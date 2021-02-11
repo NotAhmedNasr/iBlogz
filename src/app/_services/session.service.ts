@@ -23,7 +23,10 @@ export class SessionService {
     if (localStorage.getItem('userId')) {
       this.userService.getById(localStorage.getItem('userId')!).subscribe(
         res => this.loginUser.next(res),
-        console.log
+        err => {
+          this.logout();
+          location.reload();
+        }
       );
     }
   }

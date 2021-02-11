@@ -50,6 +50,7 @@ export class UserProfileComponent implements OnInit {
   invalidFile = false;
 
   ngOnInit(): void {
+    this.session.loadUser();
     this.session.getLoggedUser().subscribe(
       res => {
         if (res._id === '') {

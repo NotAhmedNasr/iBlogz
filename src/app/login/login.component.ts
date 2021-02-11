@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     private router: Router, private session: SessionService) {
       if (localStorage.getItem('userId')) {
         this.router.navigateByUrl('');
-      }
+      };
     }
 
   loginForm: FormGroup = new FormGroup({});

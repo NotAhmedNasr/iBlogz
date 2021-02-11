@@ -38,6 +38,7 @@ export class UserDetailsListComponent implements OnInit {
   }
 
   getAll() {
+    this.showSpinner = true;
     this.page = 0;
     this.all = true;
     this.endOfLoading = false;
@@ -47,6 +48,7 @@ export class UserDetailsListComponent implements OnInit {
   }
 
   getFollowing() {
+    this.showSpinner = true;
     this.page = 0;
     this.following = true;
     this.endOfLoading = false;
@@ -56,6 +58,7 @@ export class UserDetailsListComponent implements OnInit {
   }
 
   getFollowers() {
+    this.showSpinner = true;
     this.page = 0;
     this.followers = true;
     this.endOfLoading = false;
