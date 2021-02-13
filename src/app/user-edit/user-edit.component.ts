@@ -18,6 +18,7 @@ export class UserEditComponent implements OnInit {
   ) { }
 
   hide = true;
+  submit = false;
   newPassword = false;
   maxDate: Date = new Date();
   minDate: Date = new Date();
@@ -99,7 +100,14 @@ export class UserEditComponent implements OnInit {
         this.session.loadUser();
         this.dialogRef.close();
       },
-      console.log
+      err => {
+        this.submit = true;
+        if (err.error[0] === 'username') {
+          this.editForm.get('username')?.setValue('');
+        } else if (err.error[0] === 'email') {
+          this.editForm.get('email')?.setValue('');
+        }
+      }
     );
   }
 }

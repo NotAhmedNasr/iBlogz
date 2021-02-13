@@ -13,7 +13,7 @@
       <mat-error>
         Invalid username
       </mat-error>
-      <mat-error>
+      <mat-error *ngIf="submit">
         Username already taken
       </mat-error>
       <mat-hint>
@@ -34,7 +34,7 @@
         Invalid email
       </mat-error>
 
-      <mat-error>
+      <mat-error *ngIf="submit">
         Email already exists
       </mat-error>
     </mat-form-field>
