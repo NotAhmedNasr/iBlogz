@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from '../_models/user';
 import { SessionService } from '../_services/session.service';
@@ -15,7 +16,7 @@ export class UserEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: { user: User },
     public dialogRef: MatDialogRef<UserEditComponent>, private userService: UserService,
-    private session: SessionService, private router: Router
+    private session: SessionService, private snackBar: MatSnackBar
   ) { }
 
   hide = true;
@@ -98,6 +99,7 @@ export class UserEditComponent implements OnInit {
   edit() {
     this.userService.edit(this.editForm.value).subscribe(
       res => {
+        this.openSnackBar('Edited successfully')
         this.session.loadUser();
         this.dialogRef.close();
       },
@@ -105,12 +107,18 @@ export class UserEditComponent implements OnInit {
         this.submit = true;
         if (err.error[0] === 'username') {
           this.editForm.get('username')?.setValue('');
-          window.scroll(0,0);
+          this.openSnackBar('username is already taken!');
         } else if (err.error[0] === 'email') {
           this.editForm.get('email')?.setValue('');
-          window.scroll(0,0);
+          this.openSnackBar('email is already taken!');
         }
       }
     );
+  }
+
+  openSnackBar(message: any) {
+    this.snackBar.open(message,'' , {
+      duration: 1000,
+    });
   }
 }
