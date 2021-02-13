@@ -45,6 +45,7 @@ mat-toolbar {
 
 .actions-active {
   border-bottom: 4px solid #209CEE;
+  color: #209CEE;
 }
 
 .add {

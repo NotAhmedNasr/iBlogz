@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { BlogAddComponent } from '../blog-add/blog-add.component';
 import { User } from '../_models/user';
 import { SessionService } from '../_services/session.service';
-import {filter} from 'rxjs/operators'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-nav-bar',
@@ -25,10 +25,9 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)
-          ).subscribe((event) =>
-           {
-              this.currentUrl = (event as NavigationEnd).url;
-           });
+    ).subscribe((event) => {
+      this.currentUrl = (event as NavigationEnd).url;
+    });
     this.session.getLoggedUser().subscribe(
       res => {
         this.user = res;
@@ -47,6 +46,13 @@ export class NavBarComponent implements OnInit {
   user: User = new User();
 
   loggedIn = false;
+
+  headings: any = {
+    '/search': 'Search',
+      '/': 'Home',
+      '/users': 'People',
+      '/profile': 'Profile',
+  }
 
 
   openDialog(): void {

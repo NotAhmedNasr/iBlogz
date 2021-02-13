@@ -5,6 +5,8 @@
       class="home">
   </button>
 
+  <span class="ml-3 d-none d-md-inline">{{headings[currentUrl]}}</span>
+
   <span class="spacer"></span>
 
   <button class="actions"
@@ -17,7 +19,7 @@
 
   <button
       class="actions"
-      matTooltip="find people"
+      matTooltip="people"
       [ngClass]="{'actions-active': currentUrl == '/users'}"
       routerLink="/users"
       *ngIf="loggedIn">
