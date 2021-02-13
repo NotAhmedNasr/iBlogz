@@ -105,10 +105,10 @@ export class UserEditComponent implements OnInit {
         this.submit = true;
         if (err.error[0] === 'username') {
           this.editForm.get('username')?.setValue('');
-          this.router.navigateByUrl('#username');
+          window.scroll(0,0);
         } else if (err.error[0] === 'email') {
           this.editForm.get('email')?.setValue('');
-          this.router.navigateByUrl('#email');
+          window.scroll(0,0);
         }
       }
     );
