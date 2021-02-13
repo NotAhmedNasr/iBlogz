@@ -4,6 +4,20 @@
     <mat-card-title>{{user?.username}}</mat-card-title>
     <mat-card-subtitle>{{user?.email}}</mat-card-subtitle>
   </mat-card-header>
+  <mat-card-content class="text-center">
+    <span class="text-primary mr-2">
+      Followers:
+      <span class="text-success">
+        {{user.followers.length}}
+      </span>
+    </span>
+    <span class="text-primary">
+      Following:
+      <span class="text-success">
+        {{user.following.length}}
+      </span>
+    </span>
+  </mat-card-content>
   <mat-card-actions class="text-center">
     <button mat-button (click)="view();">VIEW PROFILE</button>
   </mat-card-actions>

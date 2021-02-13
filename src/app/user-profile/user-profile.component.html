@@ -53,6 +53,21 @@
           <mat-icon color="primary" class="mr-1">history_edu</mat-icon>
           <span>Joined in {{user.created_at |date}}</span>
         </div>
+
+        <div class="text-center">
+          <span class="text-primary mr-2">
+            Followers:
+            <span class="text-success">
+              {{user.followers.length}}
+            </span>
+          </span>
+          <span class="text-primary">
+            Following:
+            <span class="text-success">
+              {{user.following.length}}
+            </span>
+          </span>
+        </div>
       </div>
 
     </div>

@@ -77,19 +77,6 @@ export class BlogEditComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  uploadimage(input: any) {
-    const files: FileList = (input as HTMLInputElement).files as FileList;
-
-    if (files[0] && files[0].type !== undefined && this.allowedFiles.includes(files[0].type) && files[0].size < 20000000) {
-      this.imageToUpload = files[0];
-      this.invalidFile = false;
-    } else {
-      this.invalidFile = true;
-      this.imageToUpload = null;
-    }
-
-  }
-
   edit() {
     const blog = this.blogForm.value;
     this.blogService.edit(this.toEditBlog._id!, blog).subscribe(
