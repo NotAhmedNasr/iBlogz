@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { User } from '../_models/user';
 import { SessionService } from '../_services/session.service';
 import { UserService } from '../_services/user.service';
@@ -14,7 +15,7 @@ export class UserEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: { user: User },
     public dialogRef: MatDialogRef<UserEditComponent>, private userService: UserService,
-    private session: SessionService
+    private session: SessionService, private router: Router
   ) { }
 
   hide = true;
@@ -104,8 +105,10 @@ export class UserEditComponent implements OnInit {
         this.submit = true;
         if (err.error[0] === 'username') {
           this.editForm.get('username')?.setValue('');
+          this.router.navigateByUrl('#username');
         } else if (err.error[0] === 'email') {
           this.editForm.get('email')?.setValue('');
+          this.router.navigateByUrl('#email');
         }
       }
     );
