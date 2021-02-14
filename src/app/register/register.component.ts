@@ -90,10 +90,10 @@ export class RegisterComponent implements OnInit {
       err => {
         this.submit = true;
         if (err.error[0] === 'username') {
-          this.registerForm.get('username')?.setValue('');
+          this.username.setValue('');
           this.myStepper!.selectedIndex = 0;
         } else if (err.error[0] === 'email') {
-          this.registerForm.get('email')?.setValue('');
+          this.email.setValue('');
           this.myStepper!.selectedIndex = 1;
         }
       }

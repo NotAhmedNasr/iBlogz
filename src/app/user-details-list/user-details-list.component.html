@@ -1,4 +1,4 @@
-<div class="container p-0">
+<div class="container-fluid p-0">
   <div class="filters text-center">
     <button mat-raised-button class="mb-2 ml-2" [disabled]="all" [ngClass]="{'bg-success': all, 'text-white': all}" (click)="getAll();">
       All
@@ -12,7 +12,7 @@
       Following
     </button>
   </div>
-  <div @fade class="user col-12 offset-md-2 col-md-8 p-0" *ngFor="let user of users">
+  <div @fade class="user col-12 offset-md-3 col-md-6 p-0" *ngFor="let user of users">
     <app-user-details [user]="user">
     </app-user-details>
   </div>
